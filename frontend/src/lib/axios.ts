@@ -2,9 +2,9 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const axiosInstance = axios.create({
-    // HARDCODED FOR ANDROID DEBUGGING
-    baseURL: 'http://localhost:8081/api',
-    // baseURL: process.env.NEXT_PUBLIC_API_URL || '/api',
+    // URL Production Railway
+    baseURL: 'https://galerismkn5web-production.up.railway.app/api',
+    // baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://galerismkn5web-production.up.railway.app/api',
     headers: {
         'X-Requested-With': 'XMLHttpRequest',
         'Accept': 'application/json',

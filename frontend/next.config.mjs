@@ -36,15 +36,15 @@ const nextConfig = {
         pathname: '/**',
       },
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '8000',
+        protocol: 'https',
+        hostname: 'galerismkn5web-production.up.railway.app',
+        port: '',
         pathname: '/storage/**',
       },
     ],
   },
   env: {
-    NEXT_PUBLIC_API_URL: 'http://localhost:8081/api',
+    NEXT_PUBLIC_API_URL: 'https://galerismkn5web-production.up.railway.app/api',
   }
 };
 
