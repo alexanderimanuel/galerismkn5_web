@@ -80,6 +80,10 @@
         }
     },
     "config": {
+        "platform": {
+            "ext-gd": "8.2",
+            "ext-zip": "1.10"
+        },
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
