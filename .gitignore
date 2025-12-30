@@ -1,0 +1,32 @@
+# Mengabaikan file environment di semua level
+
+*.env
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Folder dependensi Backend (Laravel)
+
+/backend/vendor/
+
+# Folder dependensi Frontend (Next.js)
+
+/frontend/node_modules/
+
+# Next.js build output dan cache
+
+/frontend/.next/
+/frontend/out/
+
+# File log dan sistem
+
+.log
+/backend/storage/logs/.log
+!/backend/storage/logs/.gitignore
+
+# Sistem Operasi
+
+.DS_Store
+Thumbs.db

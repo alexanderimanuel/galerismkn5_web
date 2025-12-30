@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Galeri SMKN 5</string>
+    <string name="title_activity_main">Galeri SMKN 5</string>
+    <string name="package_name">com.galerismkn5.app</string>
+    <string name="custom_url_scheme">com.galerismkn5.app</string>
+</resources>
