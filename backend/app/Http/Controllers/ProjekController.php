@@ -313,6 +313,14 @@ class ProjekController extends Controller
                 ], 403);
             }
 
+            // Prevent update if project is already graded
+            if ($proyek->status === 'dinilai' && $currentUser->role !== 'admin') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Cannot update project that has been graded'
+                ], 403);
+            }
+
             $validator = Validator::make($request->all(), [
                 'judul' => 'sometimes|required|string|max:255',
                 'deskripsi' => 'sometimes|required|string',
@@ -412,6 +420,14 @@ class ProjekController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Unauthorized to delete this project'
+                ], 403);
+            }
+
+            // Prevent deletion if project is already graded
+            if ($proyek->status === 'dinilai' && Auth::user()->role !== 'admin') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Cannot delete project that has been graded'
                 ], 403);
             }
 
