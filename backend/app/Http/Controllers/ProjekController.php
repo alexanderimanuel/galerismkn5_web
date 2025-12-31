@@ -28,18 +28,18 @@ class ProjekController extends Controller
                     if ($request->status === 'terkirim') {
                         // Only show terkirim projects from teacher's department
                         $query->where('status', 'terkirim')
-                              ->where('jurusan_id', $user->jurusan_id);
+                            ->where('jurusan_id', $user->jurusan_id);
                     } else {
                         $query->byStatus($request->status);
                     }
                 } else {
                     // Default: show dinilai projects + terkirim from teacher's department
-                    $query->where(function($q) use ($user) {
+                    $query->where(function ($q) use ($user) {
                         $q->where('status', 'dinilai')
-                          ->orWhere(function($subQ) use ($user) {
-                              $subQ->where('status', 'terkirim')
-                                   ->where('jurusan_id', $user->jurusan_id);
-                          });
+                            ->orWhere(function ($subQ) use ($user) {
+                                $subQ->where('status', 'terkirim')
+                                    ->where('jurusan_id', $user->jurusan_id);
+                            });
                     });
                 }
             } else {
@@ -543,8 +543,8 @@ class ProjekController extends Controller
                     'from' => $proyeks->firstItem(),
                     'to' => $proyeks->lastItem(),
                 ],
-                'message' => $proyeks->total() > 0 
-                    ? "Found {$proyeks->total()} ungraded projects from your department" 
+                'message' => $proyeks->total() > 0
+                    ? "Found {$proyeks->total()} ungraded projects from your department"
                     : "No ungraded projects found from your department"
             ]);
         } catch (\Exception $e) {
@@ -562,13 +562,12 @@ class ProjekController extends Controller
     public function best(): JsonResponse
     {
         try {
+            // Updated logic: Show ALL graded projects (latest 20), not just 5-star ones.
             $proyeks = Proyek::with(['user.kelas', 'jurusan', 'penilaian.guru'])
-                ->whereHas('penilaian', function ($query) {
-                    $query->where('bintang', 5);
-                })
                 ->where('status', 'dinilai')
+                ->whereHas('penilaian')
                 ->latest()
-                ->limit(10)
+                ->limit(20)
                 ->get();
 
             return response()->json([
