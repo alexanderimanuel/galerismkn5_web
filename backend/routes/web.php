@@ -3,10 +3,21 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Artisan;
 use App\Models\User;
 
 Route::get('/', function () {
     return ['Laravel' => app()->version()];
+});
+
+// ROUTE RAHASIA UNTUK PERBAIKI IMAGE 404
+Route::get('/fix-storage', function () {
+    try {
+        Artisan::call('storage:link');
+        return 'BERHASIL! Storage link telah dibuat. Silakan cek aplikasi Android Anda, gambar seharusnya sudah muncul.';
+    } catch (\Exception $e) {
+        return 'GAGAL: ' . $e->getMessage();
+    }
 });
 
 // Simple session login for docs access
@@ -39,4 +50,4 @@ Route::post('/docs-logout', function (Request $request) {
     return redirect('/docs-login');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
